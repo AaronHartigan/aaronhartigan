@@ -125,14 +125,14 @@
 		<div id="mazeWrapper" actualHeight="620" activeProject=0>
 			<p> Here is a maze! Press the button find all of the solutions. </p>
 			<div class="button">
-				<button type="button" class="button" onclick="mazeStart()">Start</button><!--
+				<button id="mazeButton" type="button" class="button" onclick="mazeStart()">Start</button><!--
 			    <button type="button" class="button" onclick="STWOautoPlay()">Auto Play</button>
 			</div>-->
 			
-			<pre><div id="mazeArea"></div></pre>
+			<span id="mazeSpan"><pre><div id="mazeArea"></div></pre></span>
 			<div class="slider">
-				Slow<input id="mazeSlider" type="range" min=".5" max="5"
-				step=".5" value="5"/>Fast
+				Slow<input id="mazeSlider" type="range" min="1" max="10"
+				step="1" value="10"/>Fast
 			</div>
 			
 			<p> Code is based heavily off of Prof. Ross's.</p>
@@ -141,7 +141,7 @@
 	</div>
 </div>
 <div id="footer">
-	Copyright &copy; 2015 &#8729; All Rights Reserved 
+	Copyright &copy; 2016 &#8729; All Rights Reserved 
 </div>
 
 <script src="code.js"></script>

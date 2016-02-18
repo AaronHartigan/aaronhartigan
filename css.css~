@@ -217,10 +217,10 @@ a {
     user-select: none;
 }
 #mazeArea {
-	line-height: 1;
+	line-height: .6;
 	font-size: 30px;
 	background-color: #fafafa;
-	font-family: Courier New, Ubuntu Mono, Monaco, monospace;
+	font-family: Courier New, Monaco, monospace;
 	text-align: center;
 	width: 210px;
 	height: 210px;

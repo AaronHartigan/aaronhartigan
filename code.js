@@ -1075,7 +1075,6 @@ var mazeString = mazeBoard.join('');
 var MAZEWIDTH = 11;
 var mazeTarget = '@';
 var mazeWall = '■';
-printMazeArea();
 
 var maze_cell = [];
 maze_cell[0] = {
@@ -1086,36 +1085,12 @@ maze_cell[0] = {
 
 function printMazeArea() {
 	mazeString = mazeBoard.join('');
-	//a newline is added for aesthetics
 	mazeArea.innerHTML = '\n' + mazeString;
 }
-/*
-	// returns an array of all directions the current location can travel
-	var domain = mazeArrowDomain(n);
-	var i = 0;
-	(function nextStep() {
-		if (i < domain.length) {
-			mazeGetNextCell(n, domain[i])
-			mazeDrawCurrentArrow(n);
-			printMazeArea();
-			
-			mazeBuild(n+1, function(solved) {
-				if (solved)
-					callback(true);
-				else {
-					mazeEraseCurrentArrow(n);
-					i++;
-					setTimeout(nextStep, 100);
-				}
-			});
-		}
-		else {
-			setTimeout(callback, 100, false);
-		}
-	})();
-*/
+
 var mazeSlider = document.getElementById("mazeSlider");
 var mazeDelay = (1/mazeSlider.value) * 100;
+
 function mazeBuild(n, callback) {
 	setTimeout( function() { var domain = mazeArrowDomain(n);
 		setTimeout( function() { var i = 0;
@@ -1129,13 +1104,15 @@ function mazeBuild(n, callback) {
 							if (solved)
 								callback(true);
 							else {
-								setTimeout(mazeEraseCurrentArrow(n), mazeDelay);
+								mazeEraseCurrentArrow(n);
 								i++;
 								setTimeout(nextStep, mazeDelay);
 							}
 						});
 					}
 					else {
+						if (n == 0)
+							mazeFinished();
 						setTimeout(callback, mazeDelay, false);
 					}
 				})();
@@ -1171,11 +1148,10 @@ function mazeArrowDomain(n) {
 	return domain;
 }
 
+var mazeReset = 0;
 function mazeSolved(n) {
 	var index = mazeIndexOfPointedDirection(n);
 	if (mazeBoard[index] == mazeTarget) {
-		window.alert("Solution Found! " + n);
-		mazeEraseCurrentArrow(n)
 		return true;
 	}
 	return false;
@@ -1231,7 +1207,6 @@ function mazeGetNextCell(n, direction) {
 		maze_cell[n+1].col = maze_cell[n].col;
 		maze_cell[n+1].dir = 0;
 	}
-	//window.alert(maze_cell[n+1].row + ", " + maze_cell[n+1].col);
 	
 	if (direction == 0){
 		maze_cell[n].dir = 'e';
@@ -1253,29 +1228,6 @@ function mazeGetNextCell(n, direction) {
 		maze_cell[n+1].row--;
 		return 1;
 	}
-	/*if (maze_cell[n].dir == 0){
-		maze_cell[n].dir = 'e';
-		maze_cell[n+1].col++;
-		return 1;
-	}
-	else if (maze_cell[n].dir == 'e'){
-		maze_cell[n].dir = 's';
-		maze_cell[n+1].row++;
-		return 1;
-	}
-	else if (maze_cell[n].dir == 's'){
-		maze_cell[n].dir = 'w';
-		maze_cell[n+1].col--;
-		return 1;
-	}
-	else if (maze_cell[n].dir == 'w'){
-		maze_cell[n].dir = 'n';
-		maze_cell[n+1].row--;
-		return 1;
-	}
-	else if (maze_cell[n].dir == 'n'){
-		return 0;
-	}*/
 	return 0;
 }
 
@@ -1294,12 +1246,11 @@ function mazeCellOk(n) {
 var mazeNotRunning = 1;
 function mazeStart() {
 	if (mazeNotRunning) {
+		mazeDelay = (1/mazeSlider.value) * 100;
+		document.getElementById("mazeButton").innerHTML = "In Progress";
+		document.getElementById("mazeButton").disabled = true;
 		mazeNotRunning = 0;
-		i = 
 		mazeBuild(0);
-	}
-	else {
-		resetMaze();
 	}
 }
 
@@ -1307,21 +1258,12 @@ function resetMaze() {
 	mazeNotRunning = 1;
 	mazeBoard = mazeBoardOriginal;
 	printMazeArea();
-	//mazeBuild(0);
+	document.getElementById("mazeButton").innerHTML = "Start";
+	document.getElementById("mazeButton").disabled = false;
+}
+function mazeFinished() {
+	resetMaze();
 }
 drawGame();
-/*
-■■■■■■■■■■
-■>>V■■>>V■
-■ ■>V■^■V■
-■ ■■>>^■V■
-■  ■■■■V<■
-■■    ■V■■
-■  ■■ V< ■
-■ ■  <V■■■
-■   ■^< @■
-■■■■■■■■■■
-*/
-
-
+resetMaze();
 
