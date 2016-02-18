@@ -30,6 +30,8 @@
 		    </div>
 		    <div onclick=toggle_show("STWOWrapper")>Play Snake 2
 		    </div>
+		    <div onclick=toggle_show("mazeWrapper")>Maze
+		    </div>
 		</div>
         <div id="bottomBorderNavBar"></div>
         
@@ -117,6 +119,23 @@
 			</div>
 			
 			<p> Use <b>WSAD</b> or the <b>arrow keys</b> to move the snake.	 Press the <b>spacebar</b> to pause/resume the game.</p>
+		    <div id="bottomBorderNavBar"></div>
+		</div>
+		
+		<div id="mazeWrapper" actualHeight="620" activeProject=0>
+			<p> Here is a maze! Press the button find all of the solutions. </p>
+			<div class="button">
+				<button type="button" class="button" onclick="mazeStart()">Start</button><!--
+			    <button type="button" class="button" onclick="STWOautoPlay()">Auto Play</button>
+			</div>-->
+			
+			<pre><div id="mazeArea"></div></pre>
+			<div class="slider">
+				Slow<input id="mazeSlider" type="range" min="1" max="10"
+				step="1" value="10"/>Fast
+			</div>
+			
+			<p> Code is based heavily off of Prof. Ross's.</p>
 		    <div id="bottomBorderNavBar"></div>
 		</div>
 	</div>

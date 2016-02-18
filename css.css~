@@ -22,7 +22,7 @@ body {
 	color: #666;
 }
 div {
-	box-shadow: 0px 0px 1px red inset;
+	//box-shadow: 0px 0px 1px red inset;
 }
 div.wrapper {
 	min-width: 600px;
@@ -216,6 +216,25 @@ a {
     -ms-user-select: none;
     user-select: none;
 }
+#mazeArea {
+	line-height: 1;
+	font-size: 30px;
+	background-color: #fafafa;
+	font-family: Courier New, Ubuntu Mono, Monaco, monospace;
+	text-align: center;
+	width: 210px;
+	height: 210px;
+	margin-left: auto;
+	margin-right: auto;
+	cursor: default;
+	box-shadow:0px 0px 4px 0px rgba(0, 0, 0, 0.5), 0px 0px 0px 1px rgba(0, 0, 0, 0.8)inset;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 canvas {
     background-color: #fafafa;
     display: block;
@@ -226,6 +245,15 @@ canvas {
     box-shadow:0px 0px 4px 0px rgba(0, 0, 0, 0.5), 0px 0px 0px 1px rgba(0, 0, 0, 1);
 }
 #STWOWrapper {
+	overflow: hidden;
+	padding: 0px 0px 0px 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	opacity: 0;
+	max-height: 0px;
+	display: block;
+}
+#mazeWrapper {
 	overflow: hidden;
 	padding: 0px 0px 0px 0px;
 	margin-top: 0px;
