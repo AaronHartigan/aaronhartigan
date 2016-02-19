@@ -1092,6 +1092,7 @@ var mazeSlider = document.getElementById("mazeSlider");
 var mazeDelay = (1/mazeSlider.value) * 100;
 
 function mazeBuild(n, callback) {
+	mazeDelay = (1/mazeSlider.value) * 100;
 	setTimeout( function() { var domain = mazeArrowDomain(n);
 		setTimeout( function() { var i = 0;
 			setTimeout( function() {
