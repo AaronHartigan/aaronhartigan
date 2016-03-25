@@ -564,11 +564,11 @@ var fruit_x;
 var fruit_y;
 var tail_x = [];
 var tail_y = [];
-var FRUIT_RADIUS = 4;
-var SNAKE_RADIUS = 4;
-var TAIL_RADIUS = 3.5;
+var FRUIT_RADIUS = 6;
+var SNAKE_RADIUS = 6;
+var TAIL_RADIUS = 5.25;
 var STWOtailLength = 0;
-var grd = context.createRadialGradient(WIDTH/2, HEIGHT/2, 0, WIDTH/2, HEIGHT/2, 302);
+var grd = context.createRadialGradient(WIDTH/2, HEIGHT/2, 0, WIDTH/2, HEIGHT/2, 400);
     grd.addColorStop(0, '#8ED6FF');
     grd.addColorStop(1, '#003BA2');
     
@@ -577,7 +577,7 @@ var snakegrd = context.createLinearGradient(-SNAKE_RADIUS * 1.5, 0, SNAKE_RADIUS
     snakegrd.addColorStop(1, '#90EE90');
     
 var STWOside = document.getElementById("STWOslide");
-var GAME_SPEED_RATE = 2.5;
+var GAME_SPEED_RATE = 5;
 var pixelsPerFrame = GAME_SPEED_RATE * STWOslide.value;
 
 var STWOautoPlayBool = 0;
@@ -888,7 +888,7 @@ function moveSTWOtail() {
             frameMarker = (allInputsMaxSize) - (frameDelay * (i + 1) * headAndFirstTailSectionGap);
         }
         else {
-            frameMarker = (allInputsMaxSize) - (frameDelay * ((i + 1) + (headAndFirstTailSectionGap - 1)));
+            frameMarker = (allInputsMaxSize) - (frameDelay * (i + headAndFirstTailSectionGap));
         }
         if (frameMarker >= 0) {
             if ( allInputs[frameMarker] == "up" ) {
@@ -911,32 +911,29 @@ function moveSTWOtail() {
 }
 
 function checkFruitCollision() {
-    var collision = 0;
     var snake_x_center = snake_x + SNAKE_RADIUS;
     var snake_y_center = snake_y + SNAKE_RADIUS;
     var totDistance = FRUIT_RADIUS + SNAKE_RADIUS;
     if (Math.abs(snake_x_center - fruit_x) <= (totDistance)) {
         if (Math.abs(snake_y_center - fruit_y) <= (totDistance)) {
-            collision = 1;
+            return true;
         }
     }
-    return collision;
+    return false;
 }
 
 function checkSelfCollision(x, y) {
-    var collision = 0;
     var snake_x_center = x + SNAKE_RADIUS;
     var snake_y_center = y + SNAKE_RADIUS;
     var totDistance = TAIL_RADIUS + SNAKE_RADIUS;
     for (i = 0; i < STWOtailLength; i++) {
         if (Math.abs(snake_x_center - tail_x[i]) < (totDistance)) {
             if (Math.abs(snake_y_center - tail_y[i]) < (totDistance)) {
-                collision = 1;
-                break;
+                return true;
             }
         }
     }
-    return collision;
+    return false;
 }
 
 function checkWallCollision(x, y) {
@@ -1097,7 +1094,7 @@ function mazeBuild(n, callback) {
 		setTimeout( function() { var i = 0;
 			setTimeout( function() {
 				(function nextStep() {
-					if (i < domain.length) {
+					if (i < domain.length && mazeValidSquare(n)) {
 						mazeGetNextCell(n, domain[i])
 						mazeDrawCurrentArrow(n);
 						printMazeArea();
@@ -1149,6 +1146,13 @@ function mazeArrowDomain(n) {
 	return domain;
 }
 
+function mazeValidSquare(n) {
+	var index = maze_cell[n].row * MAZEWIDTH + maze_cell[n].col;
+	if (mazeBoard[index] == '■') {
+		return false;
+	}
+	return true;
+}
 var mazeReset = 0;
 function mazeSolved(n) {
 	var index = mazeIndexOfPointedDirection(n);

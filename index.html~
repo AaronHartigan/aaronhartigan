@@ -112,7 +112,7 @@
 				<span><text id="STWOgameOverText">Game Over</text></span>
 				<span>Highscore: <text id="STWOhighscore">0</text></span>
 			</p>
-			<canvas id="STWOgameArea"> </canvas>
+			<canvas id="STWOgameArea" height="540" width="270"> </canvas>
 			<div class="slider">
 				Slow<input id="STWOslide" type="range" min=".4" max="1"
 				step=".12" value="1"/>Fast
@@ -129,7 +129,7 @@
 			    <button type="button" class="button" onclick="STWOautoPlay()">Auto Play</button>
 			</div>-->
 			
-			<span id="mazeSpan"><pre><div id="mazeArea"></div></pre></span>
+			<pre><div id="mazeArea"></div></pre>
 			<div class="slider">
 				Slow<input id="mazeSlider" type="range" min="1" max="10"
 				step="1" value="10"/>Fast
