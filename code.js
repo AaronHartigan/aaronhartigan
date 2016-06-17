@@ -258,8 +258,8 @@ function astar(target) {
 			}
 			return reverseDirections[i-1];
 		}
-		closed[current] = 1;
-		openList.splice(currentIndex, 1);
+		closed[current] = 1; // add node to closed list
+		openList.splice(currentIndex, 1); // remove node from open list
 		o--;
 		if ((o > 750) || (o < 0)) {
 			alert("The snake could not find a path, and decided to bug out!");
@@ -275,16 +275,17 @@ function astar(target) {
 			}
 			else {
 				gScore = G[current] + weight(neighbor);
-				bestGScore = 0;
-				if (beenVisited[neighbor] != 1) {
-					beenVisited[neighbor] = 1;
-					bestGScore = 1;
+				bestGScore = false;
+				if (!beenVisited[neighbor]) {
+					beenVisited[neighbor] = true;
+					bestGScore = true;
+					//H score is manhatten distance from target
 					H[neighbor] = Math.abs(Math.floor(target/50) - Math.floor(neighbor/50)) + Math.abs(Math.floor(target%50) - Math.floor(neighbor % 50));
 					openList.push(neighbor);
 					o++;
 				}
 				else if (gScore < G[neighbor]) {
-					bestGScore = 1;
+					bestGScore = true;
 				}
 				if (bestGScore) {
 					parent[neighbor] = current;
@@ -314,7 +315,7 @@ function weight(space) {
 		//weights the map as if it is bowl shaped
 		//the two formulas are very similar, but the second one causes the snake
 		//to prefer a zig-zag motion of travel, so the first one is better.
-		return ((Math.abs((space % 50) - 25)) / 23) + ((Math.abs(Math.floor(space / 50) - 7)) / 6) + 1;
+		return ((Math.abs((space % 50) - 25))/23) + ((Math.abs(Math.floor(space/50) - 7)) / 6) + 1;
 		//return ((Math.abs(7 - Math.floor(space/50))) + (Math.abs(25 - (space % 50))))/32 + 1;
 	}
 	else 
