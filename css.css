@@ -166,7 +166,7 @@ a {
     color: #FFF;
 }
 
-#bottomBorderNavBar {
+.bottomBorderNavBar {
     margin-top: 20px;
     height: 2px;
     background-color: #2269A6;
